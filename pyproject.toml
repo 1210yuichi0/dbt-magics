@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dbt-magics"
+version = "0.0.1"
+description = "IPython magics to work with dbt"
+readme = "README.md"
+dependencies = ["pandas","copydf"]
+
+[project.urls]
+Homepage = "https://github.com/1210yuichi0/dbt-magics"
+Issues = "https://github.com/1210yuichi0/dbt-magics/issues"
+
+[tool.setuptools]
+packages = ["dbt-magics"]

@@ -2,7 +2,7 @@
 
 ## Overview
 
-`dbt-magics` is a custom magic command set for [dbt](https://www.getdbt.com/) that allows you to easily operate dbt within Jupyter Notebooks. It enables direct compilation, execution, and manipulation of dbt models and SQL code, streamlining the data analysis workflow.
+`dbt-magics` is a custom magic command set for dbt　that allows you to easily operate dbt within Jupyter Notebooks. It enables direct compilation, execution, and manipulation of dbt models and SQL code, streamlining the data analysis workflow.
 
 ## Installation
 

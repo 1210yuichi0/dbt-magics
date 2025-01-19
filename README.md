@@ -7,7 +7,7 @@
 ## Installation
 
 ```sh
-pip install https://github.com/1210yuichi0/dbt-magics
+pip install git+https://github.com/1210yuichi0/dbt-magics.git
 ```
 
 1. Import and register the magic commands in your Jupyter Notebook:

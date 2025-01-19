@@ -13,7 +13,7 @@ pip install git+https://github.com/1210yuichi0/dbt-magics.git
 1. Import and register the magic commands in your Jupyter Notebook:
 
    ```python
-   %load_ext dbt-magics
+   %load_ext dbt_magics
    ```
 
 2. Start using the `%config` line magic and the `%%dbt_show` / `%%dbt_compile` cell magics.
@@ -33,8 +33,8 @@ pd.set_option('display.max_columns', None)  # Remove the upper limit for the num
 Use the `%config` line magic to set global configurations:
 
 ```python
-%config dbt.limit=50  # Set the row limit for the `show` command (default: 50)
-%config dbt.quiet=true  # Set the output verbosity (default: true)
+%config dbt.limit = 50  # Set the row limit for the `show` command (default: 50)
+%config dbt.quiet = True  # Set the output verbosity (default: true)
 ```
 
 ### Commands

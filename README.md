@@ -43,29 +43,38 @@ Use the `%config` line magic to set global configurations. You can set the follo
 %config dbt.dbt_profiles_dir='/path/to/project'  # Set the DBT_PROFILES_DIR environment variable
 ```
 
-### Commands
+### Example Workflow
 
-#### `%%dbt_show`
+-  Configure global settings:
 
-Execute the `show` command to preview the results of a SQL model or query:
+   ```python
+   %config dbt.limit = 100
+   ```
 
-```sql
-%%dbt_show [copydf | variable_name]
-SELECT * FROM {{ ref('my_model') }}
-```
+-  Preview data:
 
-Options:
+   ```sql
+   %%dbt_show
+   SELECT * FROM {{ ref('sales_data') }}
+   ```
 
-- `copydf`: Copies the resulting DataFrame to the clipboard.
-- `variable_name`: Saves the resulting DataFrame under the specified variable name.
+-  Copy results to clipboard:
 
-#### `%%dbt_compile`
+   ```sql
+   %%dbt_show copydf
+   SELECT * FROM {{ ref('customer_data') }}
+   ```
 
-Execute the `compile` command to display the transformed SQL code:
+-  Store results in a variable:
 
-```sql
-%%dbt_compile
-SELECT * FROM {{ ref('my_model') }}
-```
+   ```sql
+   %%dbt_show customer_df
+   SELECT * FROM {{ ref('orders') }}
+   ```
 
-The transformed SQL is displayed as a collapsible section.
+-  Compile SQL:
+
+   ```sql
+   %%dbt_compile
+   SELECT * FROM {{ ref('inventory') }}
+   ```

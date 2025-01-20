@@ -1,0 +1,11 @@
+sandbox:
+
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "jaffle_shop.duckdb"
+      threads: 4
+    test:
+      type: duckdb
+      path: "{{env_var('PWD')}}/jaffle_shop.duckdb"

@@ -30,11 +30,15 @@ pd.set_option('display.max_columns', None)  # Remove the upper limit for the num
 
 ### Configuration
 
-Use the `%config` line magic to set global configurations:
+Use the `%config` line magic to set global configurations. You can set the following parameters as needed:
 
 ```python
 %config dbt.limit = 50  # Set the row limit for the `show` command (default: 50)
 %config dbt.quiet = True  # Set the output verbosity (default: true)
+%config dbt.project_dir='/path/to/project'　# Set the project directory (default: None)
+%config dbt.profiles_dir='/path/to/project'  # Set the profiles directory (default: None)
+%config dbt.target='dev'  # Set the target environment (default: None)
+%config dbt.dbt_profiles_dir='/path/to/project'  # Set the DBT_PROFILES_DIR environment variable
 ```
 
 ### Commands

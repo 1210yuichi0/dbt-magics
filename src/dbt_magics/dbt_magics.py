@@ -2,6 +2,7 @@ from IPython.core.magic import (Magics, magics_class, line_magic, cell_magic)
 from IPython.display import HTML, display
 from dbt.cli.main import dbtRunner, dbtRunnerResult
 import pandas as pd
+import os
 from copydf import copyDF
 
 
@@ -13,6 +14,9 @@ class DBTMagics(Magics):
         # dbt show --limit は指定がなければ、デフォルト5になるので指定する
         self.limit = 50  # デフォルトのリミット
         self.quiet = True  # quiet オプション（デフォルト）
+        self.project_dir = None
+        self.profiles_dir = None
+        self.target = None
     
     # 変換した SQL を表示する関数（折りたたみ対応）
     def display_converted_sql(self, sql):
@@ -27,6 +31,12 @@ class DBTMagics(Magics):
     def _run_dbt_command(self, cli_args):
         if self.quiet:
             cli_args.append("--quiet")
+        if self.project_dir is not None:
+            cli_args.extend(["--project-dir", self.project_dir])
+        if self.profiles_dir is not None:
+            cli_args.extend(["--profiles-dir", self.profiles_dir])
+        if self.target is not None:
+            cli_args.extend(["--target", self.target])
             
         res: dbtRunnerResult = self.dbt.invoke(cli_args)
         if not res.success:
@@ -40,11 +50,21 @@ class DBTMagics(Magics):
     def config(self, line):
         key, value = line.split('=')
         key = key.strip()
-        value = value.strip()
+        value = value.strip().strip("'").strip('"')
         if key == 'dbt.limit':
             self.limit = int(value)
         elif key == 'dbt.quiet':
             self.quiet = value.lower() == 'true'
+        elif key == 'dbt.project_dir':
+            self.project_dir = value
+        elif key == 'dbt.profiles_dir':
+            self.profiles_dir = value
+        elif key == 'dbt.target':
+            self.target = value
+        elif key == 'dbt.dbt_profiles_dir':
+            # DBT_PROFILES_DIR 環境変数を設定
+            os.environ['DBT_PROFILES_DIR'] = value
+            
 
     @cell_magic
     def dbt_show(self, line, cell):
@@ -79,8 +99,3 @@ class DBTMagics(Magics):
         res = self._run_dbt_command(cli_args)
         compiled_sql = res.result[0].node.compiled_code
         self.display_converted_sql(compiled_sql)
-
-    # @cell_magic
-    # def dbt_debug(self, line, cell):
-    #     cli_args = ["debug"]
-    #     res: dbtRunnerResult = self.dbt.invoke(cli_args)

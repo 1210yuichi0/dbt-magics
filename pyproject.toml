@@ -9,6 +9,13 @@ description = "IPython magics to work with dbt"
 readme = "README.md"
 dependencies = ["pandas","copydf"]
 
+[project.optional-dependencies]
+dev = [
+    "dbt-core==1.8.4",
+    "dbt-duckdb==1.8.4",
+    "duckdb"
+]
+
 [project.urls]
 Homepage = "https://github.com/1210yuichi0/dbt-magics"
 Issues = "https://github.com/1210yuichi0/dbt-magics/issues"

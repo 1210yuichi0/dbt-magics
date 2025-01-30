@@ -39,9 +39,9 @@ class DBTMagics(Magics):
         if self.target is not None:
             cli_args.extend(["--target", self.target])
         
-        logging.disable(logging.CRITICAL) # ログ出力停止
+        logging.disable(logging.CRITICAL) # すべてのログを無効化
         res: dbtRunnerResult = self.dbt.invoke(cli_args)
-        logging.disable(logging.NOTSET) # ログ設定停止
+        logging.disable(logging.NOTSET) # 元のログレベルに戻す
 
         if not res.success:
             raise RuntimeError(f"dbt command execution failed: {res.exception}")

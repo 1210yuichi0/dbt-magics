@@ -4,6 +4,7 @@ from dbt.cli.main import dbtRunner, dbtRunnerResult
 import pandas as pd
 import os
 from copydf import copyDF
+import logging
 
 
 @magics_class
@@ -37,8 +38,11 @@ class DBTMagics(Magics):
             cli_args.extend(["--profiles-dir", self.profiles_dir])
         if self.target is not None:
             cli_args.extend(["--target", self.target])
-            
+        
+        logging.disable(logging.CRITICAL) # ログ出力停止
         res: dbtRunnerResult = self.dbt.invoke(cli_args)
+        logging.disable(logging.NOTSET) # ログ設定停止
+
         if not res.success:
             raise RuntimeError(f"dbt command execution failed: {res.exception}")
         if not res.result:

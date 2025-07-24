@@ -28,7 +28,7 @@ pd.set_option('display.max_rows', None)  # Remove the upper limit for the number
 pd.set_option('display.max_columns', None)  # Remove the upper limit for the number of columns displayed
 ```
 
-### Installation　　in Jupyter Notebook
+### Installation in Jupyter Notebook
 
 ```python
 # Upgrade pip and install dbt-magics from GitHub
